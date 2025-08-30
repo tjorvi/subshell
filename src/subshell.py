@@ -1,6 +1,7 @@
 #! /usr/bin/env python3
 
 import os
+import argparse
 import pty
 import sys
 from tempfile import TemporaryDirectory
@@ -25,11 +26,10 @@ def run_command(cmd, shell=True, capture=False):
     except Exception:
         return (False, "") if capture else False
 
+
 ##############
 ### Shells
 ###
-
-
 
 class FishShell:
     def __str__(self):
@@ -52,7 +52,11 @@ class FishShell:
                 _fish_prompt
             end
             ''')
-        
+
+    def activation_script(self, prefix: str) -> str:
+        """Return fish init snippet that prefixes the current prompt."""
+        current_prompt = self.detect_prompt()
+        return self.prefix_prompt(prefix, current_prompt)
 
 
 class ZShell:
@@ -105,6 +109,14 @@ class ZShell:
     def prefix_prompt(self, prefix, prompt):
         return f'{prefix}{prompt}'
 
+    def activation_script(self, prefix: str) -> str:
+        """Return a zsh command that sets PS1 to a prefixed current prompt."""
+        current_prompt = self.detect_prompt()
+        new_prompt = self.prefix_prompt(prefix, current_prompt)
+        # Escape for double-quoted PS1 assignment
+        safe_prompt = new_prompt.replace('\\', r'\\').replace('"', r'\"')
+        return f'PS1="{safe_prompt}"'
+
 def detect_shell():
     shell_path = os.environ.get('SHELL', '/bin/bash')
     shell_name = Path(shell_path).name
@@ -114,27 +126,73 @@ def detect_shell():
     elif shell_name == 'zsh':
         return ZShell()
     
+def get_shell_by_name(name: str):
+    if not name:
+        return None
+    name = name.lower()
+    if name == 'fish':
+        return FishShell()
+    if name == 'zsh':
+        return ZShell()
+    return None
+
 
 ########################
 ### The Subshell app
 ###
 
-def main():
-    shell = detect_shell()
-
+def run_activate(shell_name, prefix):
+    shell = get_shell_by_name(shell_name) if shell_name else detect_shell()
     if not shell:
         print("No suitable shell found (fish or zsh).", file=sys.stderr)
-        sys.exit(1)
+        return 1
+    script = shell.activation_script(prefix)
+    # Print without adding an extra newline; fish snippet already ends with one
+    print(script, end='' if script.endswith('\n') else '')
+    return 0
 
-    # Parse prompt from all CLI args; default to "subshell" if none
-    args = sys.argv[1:]
-    prefix = " ".join(args).strip() if args else "[subshell] "
 
-    # Build the appropriate prompt/init configuration
+def run_launch(prefix):
+    shell = detect_shell()
+    if not shell:
+        print("No suitable shell found (fish or zsh).", file=sys.stderr)
+        return 1
     current_prompt = shell.detect_prompt()
-    new_prompt = shell.prefix_prompt(prefix, current_prompt)
-
+    new_prompt = shell.prefix_prompt(prefix or "[subshell] ", current_prompt)
     shell.run(prompt=new_prompt)
+    return 0
+
+
+### argument parsing
+
+def commandline_parser():
+    parser = argparse.ArgumentParser(prog='subshell', add_help=True)
+    # Global options (apply to default launch path as well)
+    parser.add_argument('-p', '--prefix', dest='prefix', default=None, help='Prefix to add to the prompt')
+    subparsers = parser.add_subparsers(dest='command')
+
+    # subshell activate [zsh|fish] [--prefix ...]
+    p_act = subparsers.add_parser('activate', help='Print activation snippet for the given shell')
+    p_act.add_argument('shell', nargs='?', choices=['zsh', 'fish'], help='Shell to activate for (default: detect from $SHELL)')
+    p_act.add_argument('-p', '--prefix', default='[subshell] ', help='Prefix to add to the prompt')
+    return parser
+
+
+### entry point
+
+def main(argv=None):
+    args = commandline_parser().parse_args(argv)
+
+    if args.command == 'activate':
+        return run_activate(args.shell, args.prefix)
+    
+    else:
+        # Default behavior: use provided -p/--prefix or fall back
+        prefix = args.prefix if args.prefix is not None else "[subshell] "
+        return run_launch(prefix)
+
 
 if __name__ == "__main__":
-    main()
+    code = main()
+    if code:
+        sys.exit(code)
