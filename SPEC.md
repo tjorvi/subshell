@@ -25,5 +25,5 @@
 
 5. **Portability**
    - Core spec portable across shells.
-   - Implement separately for zsh, fish, nushell.
+   - Implement separately for zsh, fish (3.6+), nushell.
    - Must coexist cleanly with frameworks like oh-my-zsh and Starship.
