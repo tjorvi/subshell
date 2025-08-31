@@ -1,61 +1,59 @@
 # Subshell
 
-Run a subshell with a given prompt prefix.
+Directory-aware prompt prefix line that renders above your existing prompt. It’s lightweight, portable, and plays nicely with your current theme.
 
-Usage:
- - subshell                # defaults to prefix "[subshell] "
- - subshell -p "[dev] "    # set a custom prefix
- - subshell --prefix "🔧 debug-mode "
- - subshell activate [zsh|fish] [-p PREFIX]  # print an activation snippet for your current shell
+## Why would I ever want that? What is it really for?
 
-Examples:
- - subshell
- - subshell -p feature/XYZ
- - subshell -p "[dev] "
- - subshell --prefix "🔧 debug-mode "
- - eval "$(subshell activate zsh -p \"[dev]\" )"  # prefix current zsh session
+Many tools run a shell with a special environment activated somehow. `aws-vault` for one can spawn a subshell with AWS credentials loaded in the environment. But these subshells look and feel exactly like your normal shell so it can get confusing.
+`SUBSHELL_PROMPT="AWS vault" subshell` will fix that.
+
+Does your development project have prerequisites that need to be running in the development environment? Maybe databases or other services?
+
+Something along the lines of `docker compose up -d && SUBSHELL_ROOT=. SUBSHELL_PROMPT="[$(pwd | basename) dev shell]" subshell ; docker compose down` will help beautifully with that.
+
+## Configuration
+
+- SUBSHELL_PROMPT: The label to display. Defaults to `subshell`.
+- SUBSHELL_ROOT: Optional project root. Resolved to an absolute path. You’re “inside” when `$PWD` equals or is under this root; otherwise “outside”.
 
 ## Supported shells
-- fish
+
 - zsh
+- fish (3.6+)
 
-## What your prompt will look like
+It coexists cleanly with frameworks like oh-my-zsh and Starship; your base prompt remains untouched and continues to update normally.
 
-Below are approximate examples of how common default prompts get prefixed. Colors and theming are omitted.
+## Usage
 
-- zsh (typical default):
-	- Original: `tjorvi@host ~/repo % `
-	- With `subshell -p "[dev] "`: `[dev] tjorvi@host ~/repo % `
-	- With `subshell -p feature/XYZ`: `feature/XYZ tjorvi@host ~/repo % `
-	- With `subshell` (no args): `[subshell] tjorvi@host ~/repo % `
+- subshell                                 # label defaults to "subshell"
+- SUBSHELL_PROMPT="[dev] " subshell        # custom label via env var
+- SUBSHELL_PROMPT="🔧 debug-mode " subshell
 
-- fish (typical default):
-	- Original: `tjorvi@host ~/repo> `
-	- With `subshell -p "[dev] "`: `[dev] tjorvi@host ~/repo> `
-	- With `subshell --prefix "🔧 debug-mode "`: `🔧 debug-mode tjorvi@host ~/repo> `
-	- With `subshell` (no args): `[subshell] tjorvi@host ~/repo> `
+Quote the env var value if it contains spaces or emoji, e.g. SUBSHELL_PROMPT="🔧 debug-mode " subshell.
 
-Notes:
-- Prefix can include spaces and emoji. Quote it when it contains spaces: `subshell -p "[dev env] "`.
-- The prefix is added in front of your existing prompt; closing the subshell restores your original prompt.
+## Examples (approximate)
 
-## Activate mode (prefix your current shell)
+zsh default prompt, inside project root:
 
-Use `subshell activate` when you want to prefix the prompt of your current shell session instead of launching a nested subshell. It prints a small snippet to stdout; apply it with `eval` or `source` so it affects your current shell.
+📂 %F{33}feature/XYZ%f
+tjorvi@host ~/repo % 
 
-General usage:
-- Detect from $SHELL: `subshell activate -p "[dev] "`
- - Specify shell: `subshell activate zsh -p "[dev] "` or `subshell activate fish -p "[dev] "`
+zsh default prompt, outside project root (with SUBSHELL_ROOT=/Users/me/proj):
 
-zsh examples:
-- eval: `eval "$(subshell activate zsh -p "[dev] ")"`
-- source via process substitution: `source <(subshell activate zsh -p "[dev] ")`
+‼️  %F{196}feature/XYZ is outside project root (/Users/me/proj)%f ‼️
+tjorvi@host ~/repo % 
 
-fish examples:
-- eval: `eval (subshell activate fish -p "[dev] ")`
-- source via psub: `source (subshell activate fish -p "[dev] " | psub)`
+fish default prompt, inside project root:
 
-Notes for activate:
-- If you omit the shell name, `subshell activate` detects it from `$SHELL`.
-- Quote prefixes that contain spaces or emoji, e.g. `-p "🔧 debug-mode "`.
-- To undo: in zsh, `source ~/.zshrc` restores your prompt; in fish, start a new shell or run `functions -e fish_prompt; functions -c _fish_prompt fish_prompt`.
+📂 feature/XYZ
+tjorvi@host ~/repo> 
+
+fish default prompt, outside project root:
+
+‼️  feature/XYZ is outside project root (/Users/me/proj) ‼️
+tjorvi@host ~/repo> 
+
+nu default prompt, inside project root:
+
+📂 feature/XYZ
+> 
