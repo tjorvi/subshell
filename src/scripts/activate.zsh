@@ -1,4 +1,6 @@
 # cleanup for reloads
+autoload -Uz add-zsh-hook
+
 add-zsh-hook -D chpwd subshell_chpwd 2>/dev/null
 add-zsh-hook -D precmd subshell_precmd 2>/dev/null
 unset SUBSHELL_PREV_PREFIX SUBSHELL_OUTSIDE
