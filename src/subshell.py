@@ -28,9 +28,9 @@ def run_command(cmd, shell=True, capture=False):
 
 
 def load_script(name):
-    scripts = globals().get('bundled_scripts')
+    scripts = globals().get('_bundled_scripts_')
     if scripts:
-        return scripts.get(name)
+        return scripts[name]
     else:
         return (Path(__file__).parent / "scripts" / name).read_text()
 
