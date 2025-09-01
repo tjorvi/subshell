@@ -2,6 +2,7 @@
 
 1. **Project root**
    - Optional `SUBSHELL_ROOT` env var, resolved to absolute path.
+   - If `SUBSHELL_ROOT` is unset and a `.subshell` file exists in `$PWD`, then `$PWD` is treated as the project root for this session and `SUBSHELL_ROOT` is set accordingly in the launched subshell.
    - *Inside* if `$PWD` equals or is under root, *Outside* otherwise.
 
 2. **Customizable label**
@@ -31,3 +32,19 @@
    - Core spec portable across shells.
    - Implement separately for zsh, fish (3.6+), nushell.
    - Must coexist cleanly with frameworks like oh-my-zsh and Starship.
+
+6. **Secrets management**
+    - Secrets can be provided from either the user config directory or local files.
+    - Config directory: use XDG config if available, else fallback to home config.
+       - Base dir = `${XDG_CONFIG_HOME:-~/.config}/subshell`
+    - In `$SUBSHELL_ROOT/.subshell`, lines of the form `environment=VALUE` are processed in order.
+       - Bare name (no slash) → load `${CONFIG_DIR}/{name}`
+       - Path-like value (contains `/` or starts with `./`, `../`, `~/`, or `/`) → treat as file path
+          - Relative paths are resolved against `SUBSHELL_ROOT`.
+          - `~/` expands to `$HOME`.
+       - Optional explicit prefixes (case-insensitive):
+          - `config:NAME` → force lookup in `${CONFIG_DIR}/{NAME}`
+          - `file:PATH` → force file path semantics
+    - Multiple `environment=` lines are allowed; later files override earlier variables on key conflicts.
+    - If any referenced file does not exist (whether config or local), it is an error. The subshell may still be started, but it should print that error prominently on start.
+
