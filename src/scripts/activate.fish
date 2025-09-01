@@ -78,6 +78,23 @@ function fish_prompt --description 'Wrapped prompt that injects subshell prefix'
     if not set -q SUBSHELL_OUTSIDE
         __subshell_update_state
     end
-    __subshell_render_pre_prompt
-    __subshell_original_fish_prompt
+    # If SUBSHELL_PROMPT is an empty string, do not inject any prefix per spec
+    if test -z "$SUBSHELL_PROMPT"
+        __subshell_original_fish_prompt
+        return
+    end
+
+    # Capture the user's base prompt so we can place our prefix below a leading empty line
+    set -l base (begin; __subshell_original_fish_prompt; end | string collect)
+
+    if string match -r -q '^[\n]' -- $base
+        # If the base prompt begins with a newline, output that newline first,
+        # then our prefix line, then the remainder of the base prompt.
+        printf '\n'
+        __subshell_render_pre_prompt
+        printf '%s' (string replace -r '^[\n]' '' -- $base)
+    else
+        __subshell_render_pre_prompt
+        printf '%s' $base
+    end
 end

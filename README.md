@@ -1,6 +1,6 @@
 # Subshell
 
-Directory-aware prompt prefix line that renders above your existing prompt. It’s lightweight, portable, and plays nicely with your current theme.
+Directory-aware prompt prefix line that renders above your existing prompt (or just below a leading blank line if your prompt starts with one). It’s lightweight, portable, and plays nicely with your current theme.
 
 ## Why would I ever want that? What is it really for?
 
@@ -13,7 +13,7 @@ Something along the lines of `docker compose up -d && SUBSHELL_ROOT=. SUBSHELL_P
 
 ## Configuration
 
-- SUBSHELL_PROMPT: The label to display. Defaults to `subshell`.
+- SUBSHELL_PROMPT: The label to display. Defaults to `subshell` if unset. If set to an empty string, no prefix is injected (you can still use `$SUBSHELL_OUTSIDE` in your own prompt logic).
 - SUBSHELL_ROOT: Optional project root. Resolved to an absolute path. You’re “inside” when `$PWD` equals or is under this root; otherwise “outside”.
 
 ## Supported shells
@@ -34,6 +34,12 @@ Quote the env var value if it contains spaces or emoji, e.g. SUBSHELL_PROMPT="�
 ## Examples (approximate)
 
 zsh default prompt, inside project root:
+
+📂 %F{33}feature/XYZ%f
+tjorvi@host ~/repo % 
+
+zsh default prompt that begins with a blank line (prefix is placed below the blank line):
+
 
 📂 %F{33}feature/XYZ%f
 tjorvi@host ~/repo % 

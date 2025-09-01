@@ -5,8 +5,10 @@ add-zsh-hook -D chpwd subshell_chpwd 2>/dev/null
 add-zsh-hook -D precmd subshell_precmd 2>/dev/null
 unset SUBSHELL_PREV_PREFIX SUBSHELL_OUTSIDE
 
-# Set the default to "subshell" if SUBSHELL_PROMPT is not set
-: ${SUBSHELL_PROMPT:=subshell}
+# Set the default to "subshell" only if SUBSHELL_PROMPT is unset (allow empty string)
+if (( ${+SUBSHELL_PROMPT} == 0 )); then
+  SUBSHELL_PROMPT=subshell
+fi
 
 # Normalize the SUBSHELL_ROOT, if it's set
 [[ -n ${SUBSHELL_ROOT:-} ]] && SUBSHELL_ROOT="${SUBSHELL_ROOT:A}"
@@ -43,17 +45,32 @@ subshell_precmd() {
   [[ -n ${SUBSHELL_OUTSIDE-} ]] || subshell_update_state
 
   local base=$PROMPT
-  if [[ -n $SUBSHELL_PREV_PREFIX && $base == $SUBSHELL_PREV_PREFIX$'
-'* ]]; then
-    base=${base#"$SUBSHELL_PREV_PREFIX"$'
-'}
+  # Remove previously injected prefix, handling both top-of-prompt and the variant
+  # where the user's prompt begins with an empty line.
+  if [[ -n $SUBSHELL_PREV_PREFIX ]]; then
+    if [[ $base == "$SUBSHELL_PREV_PREFIX"$'\n'* ]]; then
+      base=${base#"$SUBSHELL_PREV_PREFIX"$'\n'}
+    elif [[ $base == $'\n'"$SUBSHELL_PREV_PREFIX"$'\n'* ]]; then
+      base=$'\n'${base#$'\n'"$SUBSHELL_PREV_PREFIX"$'\n'}
+    fi
+  fi
+
+  # If SUBSHELL_PROMPT is an empty string, do not inject any prefix per spec
+  if [[ -z ${SUBSHELL_PROMPT} ]]; then
+    SUBSHELL_PREV_PREFIX=
+    PROMPT=$base
+    return
   fi
 
   local prefix
   prefix=$(subshell_render_pre_prompt)
 
-  PROMPT="$prefix"$'
-'"$base"
+  # Place prefix below a leading empty line in the user's base prompt
+  if [[ $base == $'\n'* ]]; then
+    PROMPT=$'\n'${prefix}$'\n'${base#$'\n'}
+  else
+    PROMPT=${prefix}$'\n'${base}
+  fi
   SUBSHELL_PREV_PREFIX=$prefix
 }
 
