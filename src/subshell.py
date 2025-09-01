@@ -120,13 +120,11 @@ def run_launch():
 def commandline_parser():
     parser = argparse.ArgumentParser(prog='subshell', add_help=True)
     # Global options (apply to default launch path as well)
-    parser.add_argument('-p', '--prefix', dest='prefix', default=None, help='Prefix to add to the prompt')
     subparsers = parser.add_subparsers(dest='command')
 
     # subshell activate [zsh|fish] [--prefix ...]
     p_act = subparsers.add_parser('activate', help='Print activation snippet for the given shell')
     p_act.add_argument('shell', nargs='?', choices=['zsh', 'fish'], help='Shell to activate for (default: detect from $SHELL)')
-    p_act.add_argument('-p', '--prefix', default='[subshell] ', help='Prefix to add to the prompt')
     return parser
 
 
@@ -139,7 +137,6 @@ def main(argv=None):
         return run_activate(args.shell)
     
     else:
-        # Default behavior: use provided -p/--prefix or fall back
         return run_launch()
 
 
