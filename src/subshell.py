@@ -208,8 +208,10 @@ class ZShell:
         current_zdotdir = os.environ.get('ZDOTDIR')
         current_rcpath = os.path.join(current_zdotdir if current_zdotdir else os.environ['HOME'], '.zshrc')
 
+        load_prevrc = f'source {current_rcpath}' if Path(current_rcpath).is_file() else '# No previous .zshrc to source'
+
         return dedent(f"""
-        source {current_rcpath}
+        {load_prevrc}
         eval "$({__file__} activate zsh)"
         {'ZDOTDIR=' + current_zdotdir if current_zdotdir else 'unset ZDOTDIR'}
         """)
