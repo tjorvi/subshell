@@ -2,6 +2,13 @@
 
 Directory-aware prompt prefix line that renders above your existing prompt (or just below a leading blank line if your prompt starts with one). It’s lightweight, portable, and plays nicely with your current theme.
 
+
+## Status
+
+**Development**
+
+Features and configuration keys are under steady development.
+
 ## Why would I ever want that? What is it really for?
 
 Many tools run a shell with a special environment activated somehow. `aws-vault` for one can spawn a subshell with AWS credentials loaded in the environment. But these subshells look and feel exactly like your normal shell so it can get confusing.
