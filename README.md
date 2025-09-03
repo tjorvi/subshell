@@ -1,6 +1,6 @@
 # Subshell
 
-Directory-aware prompt prefix line that renders above your existing prompt (or just below a leading blank line if your prompt starts with one). It’s lightweight, portable, and plays nicely with your current theme.
+Directory-aware prompt prefix line that manages local secrets and renders a reminder above your existing prompt (or just below a leading blank line if your prompt starts with one). It’s lightweight, portable, and plays nicely with your current theme.
 
 
 ## Status
