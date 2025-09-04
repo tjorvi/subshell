@@ -1,0 +1,12 @@
+ 
+demo-blankline@demo /tmp/subshell-demo % subshell 
+ 
+📂 subshell 
+demo-blankline@demo /tmp/subshell-demo % cd demo-subdir 
+ 
+📂 subshell 
+demo-blankline@demo /tmp/subshell-demo/demo-subdir % cd /tmp/outside 
+ 
+‼️  subshell is outside project root (/tmp/subshell-demo) ‼️ 
+demo-blankline@demo /tmp/outside %
+

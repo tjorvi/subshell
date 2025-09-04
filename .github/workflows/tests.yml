@@ -1,0 +1,68 @@
+name: Tests
+
+on:
+  push:
+    branches: [ main, master ]
+    paths:
+      - 'src/**'
+      - 'demo/**'
+      - 'assets/**'
+      - 'Makefile'
+      - 'pyproject.toml'
+      - 'uv.lock'
+      - 'tests/**'
+      - '.github/workflows/tests.yml'
+  pull_request:
+    paths:
+      - 'src/**'
+      - 'demo/**'
+      - 'assets/**'
+      - 'Makefile'
+      - 'pyproject.toml'
+      - 'uv.lock'
+      - 'tests/**'
+
+jobs:
+  screenshot-regressions:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      actions: write
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+          cache: 'pip'
+
+      - name: Install uv
+        run: pip install uv
+
+      - name: Install dependencies (dev)
+        run: uv pip install -e .[dev]
+
+      - name: Docker info
+        run: docker info
+
+      - name: Run screenshot regression tests
+        env:
+          PYTEST_ADDOPTS: -k test_prompt_screenshots -m "not slow" --maxfail=1 -q
+        run: |
+          uv run -m pytest || echo "TEST_FAILURE=1" >> $GITHUB_ENV
+
+      - name: Archive generated assets on failure
+        if: env.TEST_FAILURE == '1'
+        uses: actions/upload-artifact@v4
+        with:
+          name: failed-screenshots
+          path: |
+            assets/*.png
+            tests/test_screenshots/*
+          if-no-files-found: ignore
+
+      - name: Fail job if tests failed
+        if: env.TEST_FAILURE == '1'
+        run: exit 1

@@ -1,0 +1,28 @@
+# Subshell integration modules for Starship
+# Add these sections to your starship.toml, or use subshell's --starship-config flag
+
+[custom.subshell_inside]
+when = 'test "${SUBSHELL_OUTSIDE:-0}" -eq 0 && test -n "${SUBSHELL_PROMPT:-}"'
+command = 'printf %s "${SUBSHELL_PROMPT:-subshell}"'
+symbol = '📂'
+style = 'blue'
+format = '[$symbol$output]($style)'
+shell = 'sh'
+description = 'Show subshell indicator when inside project root'
+
+[custom.subshell_outside]
+when = 'test "${SUBSHELL_OUTSIDE:-0}" -eq 1 && test -n "${SUBSHELL_PROMPT:-}"'
+command = 'printf "%s (outside %s)" "${SUBSHELL_PROMPT:-subshell}" "${SUBSHELL_ROOT}"'
+symbol = '‼️ '
+style = 'red bold'
+format = '[$symbol$output]($style)'
+shell = 'sh'
+description = 'Show warning when subshell is outside project root'
+
+# To use these modules, add them to your format string, for example:
+# format = "$custom.subshell_outside$custom.subshell_inside$all"
+#
+# Or if you want them on their own line (similar to the default behavior):
+# format = """
+# $custom.subshell_outside$custom.subshell_inside
+# $all"""

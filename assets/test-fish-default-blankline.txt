@@ -1,0 +1,14 @@
+Welcome to fish, the friendly interactive shell 
+Type help for instructions on how to use fish 
+ 
+demo-blankline@demo /t/subshell-demo> subshell 
+ 
+📂 subshell 
+demo-blankline@demo /t/subshell-demo> cd demo-subdir 
+ 
+📂 subshell 
+demo-blankline@demo /t/s/demo-subdir> cd /tmp/outside 
+ 
+‼️  subshell is outside project root (/tmp/subshell-demo) ‼️ 
+demo-blankline@demo /t/outside>
+

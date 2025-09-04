@@ -1,0 +1,108 @@
+FROM docker:27-cli AS dockercli
+
+FROM ghcr.io/charmbracelet/vhs:latest
+USER root
+RUN apt-get update \
+ -o Acquire::AllowReleaseInfoChange::Suite=true \
+ -o Acquire::AllowReleaseInfoChange::Codename=true \
+ -o Acquire::AllowReleaseInfoChange::Version=true \
+ && apt-get install -y --no-install-recommends \
+ bash zsh fish git ca-certificates tini curl python3 \
+ && rm -rf /var/lib/apt/lists/*
+
+# Provide docker CLI and compose plugin without apt or curl
+COPY --from=dockercli /usr/local/bin/docker /usr/local/bin/docker
+# docker:cli stores plugins under /usr/libexec/docker/cli-plugins
+RUN mkdir -p /usr/local/lib/docker/cli-plugins
+COPY --from=dockercli /usr/local/libexec/docker/cli-plugins/docker-compose /usr/local/lib/docker/cli-plugins/docker-compose
+COPY --from=dockercli /usr/local/libexec/docker/cli-plugins/docker-buildx /usr/local/lib/docker/cli-plugins/docker-buildx
+
+
+#### Base demo user (default prompts only)
+RUN useradd -m demo
+RUN set -eux; \
+	echo '# ~/.zshrc (demo)\n' > /home/demo/.zshrc; \
+	echo 'PROMPT="%n@%m %~ %# "' >> /home/demo/.zshrc; \
+	chown demo:demo /home/demo/.zshrc
+
+#### Extra blank line demo user (default prompts with a blank line on top)
+RUN useradd -m demo-blankline
+RUN set -eux; \
+	echo '# ~/.zshrc (demo)\n' > /home/demo-blankline/.zshrc; \
+	echo 'PROMPT="\n%n@%m %~ %# "' >> /home/demo-blankline/.zshrc; \
+	chown demo-blankline:demo-blankline /home/demo-blankline/.zshrc
+RUN set -eux; \
+    mkdir -p /home/demo-blankline/.config/fish/conf.d; \
+    chown -R demo-blankline:demo-blankline /home/demo-blankline/.config
+COPY demo/10-blankline.fish /home/demo-blankline/.config/fish/conf.d/10-blankline.fish
+RUN chown demo-blankline:demo-blankline /home/demo-blankline/.config/fish/conf.d/10-blankline.fish
+	
+#### Global starship install and dedicated starship user
+RUN curl -sS https://starship.rs/install.sh | sh -s -- -f
+RUN useradd -m demo-starship
+RUN set -eux; \
+	echo '# ~/.zshrc (demo-starship)\n' > /home/demo-starship/.zshrc; \
+	echo 'eval "$(starship init zsh)"' >> /home/demo-starship/.zshrc; \
+	chown demo-starship:demo-starship /home/demo-starship/.zshrc
+RUN set -eux; \
+	mkdir -p /home/demo-starship/.config/fish/conf.d; \
+	printf '%s\n' 'starship init fish | source' > /home/demo-starship/.config/fish/conf.d/10-starship.fish; \
+	chown -R demo-starship:demo-starship /home/demo-starship/.config
+
+#### Oh my zsh user
+RUN useradd -m demo-oh-my-zsh
+USER demo-oh-my-zsh
+WORKDIR /home/demo-oh-my-zsh
+RUN ZSH="$HOME/.oh-my-zsh" RUNZSH=no CHSH=no \
+	sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+COPY demo/oh-my-zsh.zshrc .zshrc
+USER root
+WORKDIR /workspace
+
+#### Oh my zsh user with blank line
+RUN useradd -m demo-oh-my-zsh-blankline
+USER demo-oh-my-zsh-blankline
+WORKDIR /home/demo-oh-my-zsh-blankline
+RUN ZSH="$HOME/.oh-my-zsh" RUNZSH=no CHSH=no \
+	sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+COPY demo/oh-my-zsh.blankline.zshrc .zshrc
+USER root
+WORKDIR /workspace
+
+#### Oh my zsh user with separator line
+RUN useradd -m demo-oh-my-zsh-sepline
+USER demo-oh-my-zsh-sepline
+WORKDIR /home/demo-oh-my-zsh-sepline
+RUN ZSH="$HOME/.oh-my-zsh" RUNZSH=no CHSH=no \
+	sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+COPY demo/oh-my-zsh.sepline.zshrc .zshrc
+USER root
+WORKDIR /workspace
+
+#### Oh my zsh + powerlevel10k user
+RUN useradd -m demo-oh-my-zsh-p10k
+USER demo-oh-my-zsh-p10k
+WORKDIR /home/demo-oh-my-zsh-p10k
+RUN ZSH="$HOME/.oh-my-zsh" RUNZSH=no CHSH=no \
+	sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+RUN git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ~/powerlevel10k
+RUN echo 'source ~/powerlevel10k/powerlevel10k.zsh-theme' >>~/.zshrc
+COPY demo/oh-my-zsh.p10k.zshrc .zshrc
+COPY demo/oh-my-zsh.p10k.zsh .p10k.zsh
+# Pre-initialize powerlevel10k to download gitstatusd during build
+RUN zsh -i -c 'echo "Powerlevel10k initialized"' || true
+USER root
+WORKDIR /workspace
+
+RUN set -eux; \
+	mkdir -p /tmp/subshell-demo/demo-subdir /tmp/outside; \
+	cd /tmp/subshell-demo; \
+	git init -q || true;
+
+ENV TERM=xterm-256color
+ENV SHELL=/bin/zsh
+
+COPY dist/bin/subshell /usr/bin/
+
+USER demo
+ENTRYPOINT ["zsh"]

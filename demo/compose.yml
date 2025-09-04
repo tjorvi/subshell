@@ -1,0 +1,3 @@
+services:
+  web:   { image: nginx:alpine,  command: ["sh","-c","sleep infinity"] }
+  cache: { image: redis:alpine,  command: ["sh","-c","sleep infinity"] }

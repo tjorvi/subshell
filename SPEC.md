@@ -32,6 +32,8 @@
    - Core spec portable across shells.
    - Implement separately for zsh, fish (3.6+), nushell.
    - Must coexist cleanly with frameworks like oh-my-zsh and Starship.
+   - Must work out-of-the-box with zero configuration on the users machine or profile
+   
 
 6. **Secrets management**
     - Secrets can be provided from either the user config directory or local files.

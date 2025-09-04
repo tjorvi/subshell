@@ -1,0 +1,12 @@
+[1m[7m%[27m[1m[0m                                                                                                                                                                                                        [0m[27m[24m[J
+[1;36msubshell-demo[0m[31m🔒[0m on [1;35m master[0m 
+[1;2;31m⬢ [Docker][0m [1;32m❯[0m [K[?1h=[?2004hssubshell[?1l>[?2004l
+[1m[7m%[27m[1m[0m                                                                                                                                                                                                        [0m[27m[24m[J
+[1;36msubshell-demo[0m[31m🔒[0m on [1;35m master[0m [34m📂subshell[0m
+[1;2;31m⬢ [Docker][0m [1;32m❯[0m [K[?1h=[?2004hccd demo-subdir[?1l>[?2004l
+[1m[7m%[27m[1m[0m                                                                                                                                                                                                        [0m[27m[24m[J
+[1;36msubshell-demo/demo-subdir[0m[31m🔒[0m on [1;35m master[0m [34m📂subshell[0m
+[1;2;31m⬢ [Docker][0m [1;32m❯[0m [K[?1h=[?2004hccd /tmp/outside[?1l>[?2004l
+[1m[7m%[27m[1m[0m                                                                                                                                                                                                        [0m[27m[24m[J
+[1;36m/tmp/outside[0m[31m🔒[0m [1;31m‼️ subshell (outside /tmp/subshell-demo)[0m
+[1;2;31m⬢ [Docker][0m [1;32m❯[0m [K[?1h=[?2004h

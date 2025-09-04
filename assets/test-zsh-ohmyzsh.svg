@@ -1,0 +1,186 @@
+<svg xmlns="http://www.w3.org/2000/svg" font-family="monospace" font-size="16"
+viewBox="0 0 800 600">
+<text x="10" y="20" fill="green">➜</text>
+<text x="20" y="20" fill="green"> </text>
+<text x="30" y="20" fill="green"> </text>
+<text x="40" y="20" fill="cyan">s</text>
+<text x="50" y="20" fill="cyan">u</text>
+<text x="60" y="20" fill="cyan">b</text>
+<text x="70" y="20" fill="cyan">s</text>
+<text x="80" y="20" fill="cyan">h</text>
+<text x="90" y="20" fill="cyan">e</text>
+<text x="100" y="20" fill="cyan">l</text>
+<text x="110" y="20" fill="cyan">l</text>
+<text x="120" y="20" fill="cyan">-</text>
+<text x="130" y="20" fill="cyan">d</text>
+<text x="140" y="20" fill="cyan">e</text>
+<text x="150" y="20" fill="cyan">m</text>
+<text x="160" y="20" fill="cyan">o</text>
+<text x="170" y="20" > </text>
+<text x="180" y="20" >s</text>
+<text x="190" y="20" >u</text>
+<text x="200" y="20" >b</text>
+<text x="210" y="20" >s</text>
+<text x="220" y="20" >h</text>
+<text x="230" y="20" >e</text>
+<text x="240" y="20" >l</text>
+<text x="250" y="20" >l</text>
+<text x="260" y="20" > </text>
+<text x="10" y="40" >📂</text>
+<text x="20" y="40" > </text>
+<text x="30" y="40" fill="33">s</text>
+<text x="40" y="40" fill="33">u</text>
+<text x="50" y="40" fill="33">b</text>
+<text x="60" y="40" fill="33">s</text>
+<text x="70" y="40" fill="33">h</text>
+<text x="80" y="40" fill="33">e</text>
+<text x="90" y="40" fill="33">l</text>
+<text x="100" y="40" fill="33">l</text>
+<text x="110" y="40" > </text>
+<text x="10" y="60" fill="green">➜</text>
+<text x="20" y="60" fill="green"> </text>
+<text x="30" y="60" fill="green"> </text>
+<text x="40" y="60" fill="cyan">s</text>
+<text x="50" y="60" fill="cyan">u</text>
+<text x="60" y="60" fill="cyan">b</text>
+<text x="70" y="60" fill="cyan">s</text>
+<text x="80" y="60" fill="cyan">h</text>
+<text x="90" y="60" fill="cyan">e</text>
+<text x="100" y="60" fill="cyan">l</text>
+<text x="110" y="60" fill="cyan">l</text>
+<text x="120" y="60" fill="cyan">-</text>
+<text x="130" y="60" fill="cyan">d</text>
+<text x="140" y="60" fill="cyan">e</text>
+<text x="150" y="60" fill="cyan">m</text>
+<text x="160" y="60" fill="cyan">o</text>
+<text x="170" y="60" > </text>
+<text x="180" y="60" >c</text>
+<text x="190" y="60" >d</text>
+<text x="200" y="60" > </text>
+<text x="210" y="60" >d</text>
+<text x="220" y="60" >e</text>
+<text x="230" y="60" >m</text>
+<text x="240" y="60" >o</text>
+<text x="250" y="60" >-</text>
+<text x="260" y="60" >s</text>
+<text x="270" y="60" >u</text>
+<text x="280" y="60" >b</text>
+<text x="290" y="60" >d</text>
+<text x="300" y="60" >i</text>
+<text x="310" y="60" >r</text>
+<text x="320" y="60" > </text>
+<text x="10" y="80" >📂</text>
+<text x="20" y="80" > </text>
+<text x="30" y="80" fill="33">s</text>
+<text x="40" y="80" fill="33">u</text>
+<text x="50" y="80" fill="33">b</text>
+<text x="60" y="80" fill="33">s</text>
+<text x="70" y="80" fill="33">h</text>
+<text x="80" y="80" fill="33">e</text>
+<text x="90" y="80" fill="33">l</text>
+<text x="100" y="80" fill="33">l</text>
+<text x="110" y="80" > </text>
+<text x="10" y="100" fill="green">➜</text>
+<text x="20" y="100" fill="green"> </text>
+<text x="30" y="100" fill="green"> </text>
+<text x="40" y="100" fill="cyan">d</text>
+<text x="50" y="100" fill="cyan">e</text>
+<text x="60" y="100" fill="cyan">m</text>
+<text x="70" y="100" fill="cyan">o</text>
+<text x="80" y="100" fill="cyan">-</text>
+<text x="90" y="100" fill="cyan">s</text>
+<text x="100" y="100" fill="cyan">u</text>
+<text x="110" y="100" fill="cyan">b</text>
+<text x="120" y="100" fill="cyan">d</text>
+<text x="130" y="100" fill="cyan">i</text>
+<text x="140" y="100" fill="cyan">r</text>
+<text x="150" y="100" > </text>
+<text x="160" y="100" >c</text>
+<text x="170" y="100" >d</text>
+<text x="180" y="100" > </text>
+<text x="190" y="100" >/</text>
+<text x="200" y="100" >t</text>
+<text x="210" y="100" >m</text>
+<text x="220" y="100" >p</text>
+<text x="230" y="100" >/</text>
+<text x="240" y="100" >o</text>
+<text x="250" y="100" >u</text>
+<text x="260" y="100" >t</text>
+<text x="270" y="100" >s</text>
+<text x="280" y="100" >i</text>
+<text x="290" y="100" >d</text>
+<text x="300" y="100" >e</text>
+<text x="310" y="100" > </text>
+<text x="10" y="120" >‼</text>
+<text x="20" y="120" >️</text>
+<text x="30" y="120" > </text>
+<text x="40" y="120" > </text>
+<text x="50" y="120" fill="196">s</text>
+<text x="60" y="120" fill="196">u</text>
+<text x="70" y="120" fill="196">b</text>
+<text x="80" y="120" fill="196">s</text>
+<text x="90" y="120" fill="196">h</text>
+<text x="100" y="120" fill="196">e</text>
+<text x="110" y="120" fill="196">l</text>
+<text x="120" y="120" fill="196">l</text>
+<text x="130" y="120" fill="196"> </text>
+<text x="140" y="120" fill="196">i</text>
+<text x="150" y="120" fill="196">s</text>
+<text x="160" y="120" fill="196"> </text>
+<text x="170" y="120" fill="196">o</text>
+<text x="180" y="120" fill="196">u</text>
+<text x="190" y="120" fill="196">t</text>
+<text x="200" y="120" fill="196">s</text>
+<text x="210" y="120" fill="196">i</text>
+<text x="220" y="120" fill="196">d</text>
+<text x="230" y="120" fill="196">e</text>
+<text x="240" y="120" fill="196"> </text>
+<text x="250" y="120" fill="196">p</text>
+<text x="260" y="120" fill="196">r</text>
+<text x="270" y="120" fill="196">o</text>
+<text x="280" y="120" fill="196">j</text>
+<text x="290" y="120" fill="196">e</text>
+<text x="300" y="120" fill="196">c</text>
+<text x="310" y="120" fill="196">t</text>
+<text x="320" y="120" fill="196"> </text>
+<text x="330" y="120" fill="196">r</text>
+<text x="340" y="120" fill="196">o</text>
+<text x="350" y="120" fill="196">o</text>
+<text x="360" y="120" fill="196">t</text>
+<text x="370" y="120" fill="196"> </text>
+<text x="380" y="120" fill="196">(</text>
+<text x="390" y="120" fill="196">/</text>
+<text x="400" y="120" fill="196">t</text>
+<text x="410" y="120" fill="196">m</text>
+<text x="420" y="120" fill="196">p</text>
+<text x="430" y="120" fill="196">/</text>
+<text x="440" y="120" fill="196">s</text>
+<text x="450" y="120" fill="196">u</text>
+<text x="460" y="120" fill="196">b</text>
+<text x="470" y="120" fill="196">s</text>
+<text x="480" y="120" fill="196">h</text>
+<text x="490" y="120" fill="196">e</text>
+<text x="500" y="120" fill="196">l</text>
+<text x="510" y="120" fill="196">l</text>
+<text x="520" y="120" fill="196">-</text>
+<text x="530" y="120" fill="196">d</text>
+<text x="540" y="120" fill="196">e</text>
+<text x="550" y="120" fill="196">m</text>
+<text x="560" y="120" fill="196">o</text>
+<text x="570" y="120" fill="196">)</text>
+<text x="580" y="120" > </text>
+<text x="590" y="120" >‼</text>
+<text x="600" y="120" >️</text>
+<text x="610" y="120" > </text>
+<text x="10" y="140" fill="green">➜</text>
+<text x="20" y="140" fill="green"> </text>
+<text x="30" y="140" fill="green"> </text>
+<text x="40" y="140" fill="cyan">o</text>
+<text x="50" y="140" fill="cyan">u</text>
+<text x="60" y="140" fill="cyan">t</text>
+<text x="70" y="140" fill="cyan">s</text>
+<text x="80" y="140" fill="cyan">i</text>
+<text x="90" y="140" fill="cyan">d</text>
+<text x="100" y="140" fill="cyan">e</text>
+<text x="110" y="140" > </text>
+</svg>
