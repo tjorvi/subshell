@@ -1,6 +1,7 @@
 # Subshell
 
-Directory-aware prompt prefix line that manages local secrets and renders a reminder above your existing prompt (or just below a leading blank line if your prompt starts with one). It's lightweight, portable, and plays nicely with your current theme.
+Directory-aware prompt prefix line that manages l- SUBSHELL_PROMPT: The label to display. Defaults to `subshell` if unset. If set to an empty string, no prefix is injected but `$SUBSHELL_OUTSIDE` is still exported for custom prompt logic.
+- SUBSHELL_ROOT: Optional project root. Resolved to an absolute path. You're "inside" when `$PWD` equals or is under this root; otherwise "outside". If `SUBSHELL_ROOT` is unset and a `.subshell` file exists in `$PWD`, then `$PWD` is used as the root for this session and `SUBSHELL_ROOT` is set in the launched subshell.al secrets and renders a reminder above your existing prompt (or just below a leading blank line if your prompt starts with one). It's lightweight, portable, and plays nicely with your current theme.
 
 ## For Contributors/AI Assistants
 
@@ -67,7 +68,14 @@ Then run `subshell` and your environment will include variables from those files
 - zsh
 - fish (3.6+)
 
-It coexists cleanly with frameworks like oh-my-zsh and Starship; your base prompt remains untouched and continues to update normally.
+It coexists cleanly with supported prompt frameworks; your base prompt remains untouched and continues to update normally.
+
+### Prompt framework support
+
+- **Starship** (zsh & fish): Injects custom modules via ephemeral config
+- **Fish default prompt**: Wraps prompt function to inject prefix
+- **Zsh default prompt**: Hooks into prompt rendering
+- **Powerline10k**: Planned (see DESIGN_DECISIONS.md)
 
 ### Starship integration (zsh & fish parity)
 
@@ -87,7 +95,7 @@ Result: no duplicate prefix line; the visual indicator is rendered inline by Sta
 - SUBSHELL_PROMPT="[dev] " subshell        # custom label via env var
 - SUBSHELL_PROMPT="🔧 debug-mode " subshell
 
-Quote the env var value if it contains spaces or emoji, e.g. SUBSHELL_PROMPT="🔧 debug-mode " subshell.
+Quote the env var value if it contains spaces or emoji. Set to empty string to disable the prefix (exposes `$SUBSHELL_OUTSIDE` for custom prompt integration).
 
 ## Screenshots & Demo Assets
 
@@ -117,89 +125,11 @@ This will (re)build the demo image, generate or refresh tape files under `demo/t
 
 If a required screenshot fails to render the Make target will exit non‑zero and list which expected file was missing.
 
-### Screenshot Regression Tests
+## Testing
 
-Automated image snapshot tests guard against unintentional visual regressions in prompt rendering.
+Run `just test` to generate prompt files and compare against known-good sources in the `verified-prompts/` directory.
 
-How it works:
-- A pytest suite (`tests/test_screenshots.py`) invokes `make screenshots` lazily (only when an expected PNG is absent) and then compares each PNG in a curated allow‑list against a stored baseline using `pytest-regressions`' `image_regression` fixture.
-- Baselines are committed under `tests/test_screenshots/` (created automatically on the first run or when forced to refresh).
-- A helper test asserts that every PNG under `assets/` (excluding demo lifecycle images) is explicitly listed so additions are intentional.
-
-Running the tests locally (requires Docker):
-
-```
-uv run -m pytest -k test_prompt_screenshots
-```
-
-Convenience commands (Just recipes):
-
-```
-just test-all          # run full pytest suite (uv run pytest -q)
-just test-screenshots  # only screenshot regression tests
-just bundle-rebuild    # rebuild bundled dist/bin/subshell after script edits
-```
-
-Regenerating (approving) new baselines after an intentional visual change:
-
-```
-uv run -m pytest --force-regen -k test_prompt_screenshots
-git add tests/test_screenshots
-```
-
-CI Recommendation:
-- Run `make screenshots` + `pytest -k test_prompt_screenshots` on pushes affecting `src/**`, `demo/**`, `Makefile`, or `assets/**`.
-- Upload diff artifacts on failure so changed images can be inspected easily.
-
-Adjusting sensitivity:
-- Currently the comparison threshold is exact (`diff_threshold=0`). If minor, non‑deterministic pixel noise appears (e.g. font raster differences across platforms) raise the threshold or add a perceptual hash prefilter.
-
-### Screenshot Approval Gating
-
-In addition to the pixel baselines managed by `pytest-regressions`, a separate hash approval manifest (`tests/screenshot_approvals.json`) enforces an explicit acknowledge step for any visual change:
-
-Workflow:
-1. You (or CI) run the screenshot test suite.
-2. If an image's SHA256 hash differs from the approved hash (or it's new) the test fails immediately (before pixel diff) and copies the current image into `tests/pending/` for inspection.
-3. After manual review, re‑run with `--approve-screenshots` to update the manifest.
-
-Commands:
-
-```
-# Run full suite (fails fast on unapproved changes)
-uv run -m pytest -k test_prompt_screenshots
-
-# Approve all current changes (after manual review)
-uv run -m pytest -k test_prompt_screenshots --approve-screenshots
-
-# Iterate quickly: skip already approved & unchanged images
-uv run -m pytest -k test_prompt_screenshots --only-unapproved
-
-# List any unapproved / changed images without running full tests
-uv run python scripts/list_unapproved.py
-
-# Makefile wrappers (regenerates images if needed first)
-make approve-screenshots
-make list-unapproved
-make pending-screenshots
-```
-
-Artifacts:
-- `tests/screenshot_approvals.json`: authoritative approved hashes.
-- `tests/pending/`: current unapproved variants (overwritten on each failing run).
-
-CI Recommendation:
-- Run without `--approve-screenshots` so any change remains red until a human approves.
-- Optionally archive `tests/pending/` on failure for direct download.
-
-Rationale:
-- Prevents accidental silent acceptance caused by re-generated pixel baselines.
-- Keeps an auditable, code‑reviewable record of deliberate visual changes (hash diff in git).
-
-Adding a new screenshot:
-1. Add it to the generation pipeline (tape + make target ensures it appears in `assets/`).
-2. Append its filename to `EXPECTED_IMAGES` in `tests/test_screenshots.py`.
-3. Run the test once to create the baseline, then commit.
+**CRITICAL**: When tests fail with "Mismatched files", first examine the diff to determine if changes are intentional improvements or regressions. Only update verified files after confirming changes are improvements. See `TESTING.md` for detailed procedures.
 
 ## Environment & secrets — details
 
@@ -228,31 +158,26 @@ Example resolution:
 
 zsh default prompt, inside project root:
 
-📂 %F{33}feature/XYZ%f
+📂 subshell
 tjorvi@host ~/repo % 
 
 zsh default prompt that begins with a blank line (prefix is placed below the blank line):
 
 
-📂 %F{33}feature/XYZ%f
+📂 subshell
 tjorvi@host ~/repo % 
 
 zsh default prompt, outside project root (with SUBSHELL_ROOT=/Users/me/proj):
 
-‼️  %F{196}feature/XYZ is outside project root (/Users/me/proj)%f ‼️
+‼️  subshell is outside project root (/Users/me/proj) ‼️
 tjorvi@host ~/repo % 
 
 fish default prompt, inside project root:
 
-📂 feature/XYZ
+📂 subshell
 tjorvi@host ~/repo> 
 
 fish default prompt, outside project root:
 
-‼️  feature/XYZ is outside project root (/Users/me/proj) ‼️
+‼️  subshell is outside project root (/Users/me/proj) ‼️
 tjorvi@host ~/repo> 
-
-nu default prompt, inside project root:
-
-📂 feature/XYZ
-> 
