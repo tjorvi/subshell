@@ -1,8 +1,0 @@
-demo@demo /tmp/subshell-demo % subshell 
-📂 subshell 
-demo@demo /tmp/subshell-demo % cd demo-subdir 
-📂 subshell 
-demo@demo /tmp/subshell-demo/demo-subdir % cd /tmp/outside 
-‼️  subshell is outside project root (/tmp/subshell-demo) ‼️ 
-demo@demo /tmp/outside %
-

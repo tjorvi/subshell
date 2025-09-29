@@ -1,7 +1,0 @@
-[1m[7m%[27m[1m[0m                                                                                                                                                                                                        [0m[27m[24m[Jdemo@demo /tmp/subshell-demo % [K[?1h=[?2004hssubshell[?1l>[?2004l
-[1m[7m%[27m[1m[0m                                                                                                                                                                                                        [0m[27m[24m[J📂 [38;5;33msubshell[39m
-demo@demo /tmp/subshell-demo % [K[?1h=[?2004hccd demo-subdir[?1l>[?2004l
-[1m[7m%[27m[1m[0m                                                                                                                                                                                                        [0m[27m[24m[J📂 [38;5;33msubshell[39m
-demo@demo /tmp/subshell-demo/demo-subdir % [K[?1h=[?2004hccd /tmp/outside[?1l>[?2004l
-[1m[7m%[27m[1m[0m                                                                                                                                                                                                        [0m[27m[24m[J‼️  [38;5;196msubshell is outside project root (/tmp/subshell-demo)[39m ‼️
-demo@demo /tmp/outside % [K[?1h=[?2004h

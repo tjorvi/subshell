@@ -1,8 +1,0 @@
-[powerlevel10k] fetching gitstatusd .. [ok]                                                                                                                                                              
-❯ subshell
-❯ cd demo-subdir
-❯ cd /tmp/outside
- 
-╭─ ∅ /tmp/outside  ‼️ subshell outside /tmp/subshell-demo ········································································································································ ✔  
-╰─
-
