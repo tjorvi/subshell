@@ -1,5 +1,23 @@
 Run `just test` to generate prompt files and compare against known-good sources.
 
+## Test Cases
+
+The test suite includes scenarios for:
+
+### Standard Shell/Theme Combinations
+- Default shell prompts (zsh, fish) with and without blank lines
+- Starship integration
+- Oh-My-Zsh integration
+- Powerlevel10k integration
+
+### SUBSHELL_PROMPT Behavior Tests
+- **Empty**: `SUBSHELL_PROMPT=""` → should disable prompt injection, only set env variables  
+- **Custom**: `SUBSHELL_PROMPT="mycustom"` → should use custom text instead of "subshell"
+
+Note: Default behavior (when `SUBSHELL_PROMPT` is unset) is already tested by the standard shell/theme combinations above.
+
+These test cases ensure that the prompt injection behavior works correctly in all expected scenarios.
+
 ## CRITICAL: Do NOT blindly update verified files
 
 The `verified-prompts/` directory contains the expected baseline outputs. When tests fail with "Mismatched files":

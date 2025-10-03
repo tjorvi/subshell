@@ -22,11 +22,30 @@ SCENARIOS = [
     ('zsh','default',True),
     ('fish','default',False),
     ('fish','default',True),
-    ('zsh','starship',False),
-    ('fish','starship',False),
+    ('zsh','starship',False),  # No blankline user for starship
+    ('fish','starship',False),  # No blankline user for starship
     ('zsh','ohmyzsh',False),
     ('zsh','ohmyzsh',True),
-    ('zsh','powerlevel10k',False),
+    ('zsh','powerlevel10k',False),  # No blankline user for powerlevel10k
+]
+
+# New scenarios for testing SUBSHELL_PROMPT behavior
+# Note: 'unset' tests are redundant since base tests already cover SUBSHELL_PROMPT unset
+PROMPT_TEST_SCENARIOS = [
+    # Test SUBSHELL_PROMPT='' (should disable prompt injection)
+    ('zsh', 'default', False, 'empty'),
+    ('fish', 'default', False, 'empty'),
+    ('zsh', 'starship', False, 'empty'),
+    ('fish', 'starship', False, 'empty'),
+    ('zsh', 'ohmyzsh', False, 'empty'),
+    ('zsh', 'powerlevel10k', False, 'empty'),
+    # Test SUBSHELL_PROMPT='custom-name' (should use custom name)
+    ('zsh', 'default', False, 'custom'),
+    ('fish', 'default', False, 'custom'),
+    ('zsh', 'starship', False, 'custom'),
+    ('fish', 'starship', False, 'custom'),
+    ('zsh', 'ohmyzsh', False, 'custom'),
+    ('zsh', 'powerlevel10k', False, 'custom'),
 ]
 
 THEME_USER = {
@@ -36,10 +55,12 @@ THEME_USER = {
     'powerlevel10k': 'demo-oh-my-zsh-p10k',
 }
 
-def name_for(shell: str, theme: str, blank: bool) -> str:
+def name_for(shell: str, theme: str, blank: bool, prompt_test: str = None) -> str:
     base = f'test-{shell}-{theme}'
     if blank:
         base += '-blankline'
+    if prompt_test:
+        base += f'-prompt-{prompt_test}'
     return base
 
 def ensure_bundle():
@@ -48,8 +69,8 @@ def ensure_bundle():
 def ensure_image():
         subprocess.run(['make', 'image'], check=True)
 
-def capture_one(shell: str, theme: str, blank: bool, force: bool) -> bool:
-    name = name_for(shell, theme, blank)
+def capture_one(shell: str, theme: str, blank: bool, force: bool, prompt_test: str = None) -> bool:
+    name = name_for(shell, theme, blank, prompt_test)
     user = THEME_USER[theme]
     if blank:
         user += '-blankline'
@@ -58,16 +79,31 @@ def capture_one(shell: str, theme: str, blank: bool, force: bool) -> bool:
         'cd demo-subdir',
         'cd /tmp/outside',
     ]
+    
+    # Set up environment variables for prompt testing
+    env_vars = {}
+    if prompt_test == 'empty':
+        env_vars['SUBSHELL_PROMPT'] = ''
+    elif prompt_test == 'custom':
+        env_vars['SUBSHELL_PROMPT'] = 'mycustom'
+    
     import asyncio
-    output = asyncio.run(capture_session(user, shell, test_script))
+    output = asyncio.run(capture_session(user, shell, test_script, env_vars))
     (ASSETS / (name + '.ansi')).write_bytes(output)
     return True
 
 def iter_needed(force: bool):
+    # Original scenarios
     for shell, theme, blank in SCENARIOS:
         base = name_for(shell, theme, blank)
         if force or not (ASSETS / f'{base}.ansi').exists():
-            yield shell, theme, blank
+            yield shell, theme, blank, None
+    
+    # New prompt test scenarios
+    for shell, theme, blank, prompt_test in PROMPT_TEST_SCENARIOS:
+        base = name_for(shell, theme, blank, prompt_test)
+        if force or not (ASSETS / f'{base}.ansi').exists():
+            yield shell, theme, blank, prompt_test
 
 
 def main():
@@ -79,10 +115,10 @@ def main():
         print('[done] no captures needed')
         return
     ok = True
-    for shell, theme, blank in needed:
-        base = name_for(shell, theme, blank)
+    for shell, theme, blank, prompt_test in needed:
+        base = name_for(shell, theme, blank, prompt_test)
         print(f'[capture] {base}')
-        if not capture_one(shell, theme, blank, force):
+        if not capture_one(shell, theme, blank, force, prompt_test):
             ok = False
     if not ok:
         sys.exit(1)

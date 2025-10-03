@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" font-family="JetBrains Mono, Fira Code, SF Mono, Monaco, Consolas, monospace" font-size="16"
-viewBox="0 0 570 320" width="570" height="320">
-<rect x="0" y="0" width="570" height="320" fill="#282a36"/>
+viewBox="0 0 500 320" width="500" height="320">
+<rect x="0" y="0" width="500" height="320" fill="#282a36"/>
 <text x="10" y="20" fill="#f8f8f2">W</text>
 <text x="20" y="20" fill="#f8f8f2">e</text>
 <text x="30" y="20" fill="#f8f8f2">l</text>
@@ -174,16 +174,7 @@ viewBox="0 0 570 320" width="570" height="320">
 <text x="250" y="140" font-weight="bold" fill="#ff79c6">e</text>
 <text x="260" y="140" font-weight="bold" fill="#ff79c6">r</text>
 <text x="270" y="140" fill="#f8f8f2"> </text>
-<text x="280" y="140" fill="#bd93f9">📂</text>
-<text x="290" y="140" fill="#bd93f9">s</text>
-<text x="300" y="140" fill="#bd93f9">u</text>
-<text x="310" y="140" fill="#bd93f9">b</text>
-<text x="320" y="140" fill="#bd93f9">s</text>
-<text x="330" y="140" fill="#bd93f9">h</text>
-<text x="340" y="140" fill="#bd93f9">e</text>
-<text x="350" y="140" fill="#bd93f9">l</text>
-<text x="360" y="140" fill="#bd93f9">l</text>
-<text x="370" y="140" fill="#f8f8f2"> </text>
+<text x="280" y="140" fill="#f8f8f2"> </text>
 <text x="10" y="160" font-weight="bold" fill="#ff5555">⬢</text>
 <text x="20" y="160" font-weight="bold" fill="#ff5555"> </text>
 <text x="30" y="160" font-weight="bold" fill="#ff5555">[</text>
@@ -252,16 +243,7 @@ viewBox="0 0 570 320" width="570" height="320">
 <text x="370" y="200" font-weight="bold" fill="#ff79c6">e</text>
 <text x="380" y="200" font-weight="bold" fill="#ff79c6">r</text>
 <text x="390" y="200" fill="#f8f8f2"> </text>
-<text x="400" y="200" fill="#bd93f9">📂</text>
-<text x="410" y="200" fill="#bd93f9">s</text>
-<text x="420" y="200" fill="#bd93f9">u</text>
-<text x="430" y="200" fill="#bd93f9">b</text>
-<text x="440" y="200" fill="#bd93f9">s</text>
-<text x="450" y="200" fill="#bd93f9">h</text>
-<text x="460" y="200" fill="#bd93f9">e</text>
-<text x="470" y="200" fill="#bd93f9">l</text>
-<text x="480" y="200" fill="#bd93f9">l</text>
-<text x="490" y="200" fill="#f8f8f2"> </text>
+<text x="400" y="200" fill="#f8f8f2"> </text>
 <text x="10" y="220" font-weight="bold" fill="#ff5555">⬢</text>
 <text x="20" y="220" font-weight="bold" fill="#ff5555"> </text>
 <text x="30" y="220" font-weight="bold" fill="#ff5555">[</text>
@@ -306,47 +288,7 @@ viewBox="0 0 570 320" width="570" height="320">
 <text x="120" y="260" font-weight="bold" fill="#8be9fd">e</text>
 <text x="130" y="260" fill="#ff5555">🔒</text>
 <text x="140" y="260" fill="#f8f8f2"> </text>
-<text x="150" y="260" font-weight="bold" fill="#ff5555">‼</text>
-<text x="160" y="260" font-weight="bold" fill="#ff5555">️</text>
-<text x="170" y="260" font-weight="bold" fill="#ff5555"> </text>
-<text x="180" y="260" font-weight="bold" fill="#ff5555">s</text>
-<text x="190" y="260" font-weight="bold" fill="#ff5555">u</text>
-<text x="200" y="260" font-weight="bold" fill="#ff5555">b</text>
-<text x="210" y="260" font-weight="bold" fill="#ff5555">s</text>
-<text x="220" y="260" font-weight="bold" fill="#ff5555">h</text>
-<text x="230" y="260" font-weight="bold" fill="#ff5555">e</text>
-<text x="240" y="260" font-weight="bold" fill="#ff5555">l</text>
-<text x="250" y="260" font-weight="bold" fill="#ff5555">l</text>
-<text x="260" y="260" font-weight="bold" fill="#ff5555"> </text>
-<text x="270" y="260" font-weight="bold" fill="#ff5555">(</text>
-<text x="280" y="260" font-weight="bold" fill="#ff5555">o</text>
-<text x="290" y="260" font-weight="bold" fill="#ff5555">u</text>
-<text x="300" y="260" font-weight="bold" fill="#ff5555">t</text>
-<text x="310" y="260" font-weight="bold" fill="#ff5555">s</text>
-<text x="320" y="260" font-weight="bold" fill="#ff5555">i</text>
-<text x="330" y="260" font-weight="bold" fill="#ff5555">d</text>
-<text x="340" y="260" font-weight="bold" fill="#ff5555">e</text>
-<text x="350" y="260" font-weight="bold" fill="#ff5555"> </text>
-<text x="360" y="260" font-weight="bold" fill="#ff5555">/</text>
-<text x="370" y="260" font-weight="bold" fill="#ff5555">t</text>
-<text x="380" y="260" font-weight="bold" fill="#ff5555">m</text>
-<text x="390" y="260" font-weight="bold" fill="#ff5555">p</text>
-<text x="400" y="260" font-weight="bold" fill="#ff5555">/</text>
-<text x="410" y="260" font-weight="bold" fill="#ff5555">s</text>
-<text x="420" y="260" font-weight="bold" fill="#ff5555">u</text>
-<text x="430" y="260" font-weight="bold" fill="#ff5555">b</text>
-<text x="440" y="260" font-weight="bold" fill="#ff5555">s</text>
-<text x="450" y="260" font-weight="bold" fill="#ff5555">h</text>
-<text x="460" y="260" font-weight="bold" fill="#ff5555">e</text>
-<text x="470" y="260" font-weight="bold" fill="#ff5555">l</text>
-<text x="480" y="260" font-weight="bold" fill="#ff5555">l</text>
-<text x="490" y="260" font-weight="bold" fill="#ff5555">-</text>
-<text x="500" y="260" font-weight="bold" fill="#ff5555">d</text>
-<text x="510" y="260" font-weight="bold" fill="#ff5555">e</text>
-<text x="520" y="260" font-weight="bold" fill="#ff5555">m</text>
-<text x="530" y="260" font-weight="bold" fill="#ff5555">o</text>
-<text x="540" y="260" font-weight="bold" fill="#ff5555">)</text>
-<text x="550" y="260" fill="#f8f8f2"> </text>
+<text x="150" y="260" fill="#f8f8f2"> </text>
 <text x="10" y="280" font-weight="bold" fill="#ff5555">⬢</text>
 <text x="20" y="280" font-weight="bold" fill="#ff5555"> </text>
 <text x="30" y="280" font-weight="bold" fill="#ff5555">[</text>

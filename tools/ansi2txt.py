@@ -444,13 +444,154 @@ def render(blocks):
     
     return lines
 
+# Aesthetic color themes for SVG rendering
+COLOR_THEMES = {
+    'dracula': {
+        'background': '#282a36',
+        'foreground': '#f8f8f2',
+        'black': '#21222c',
+        'red': '#ff5555',
+        'green': '#50fa7b',
+        'yellow': '#f1fa8c',
+        'blue': '#bd93f9',
+        'magenta': '#ff79c6',
+        'cyan': '#8be9fd',
+        'white': '#f8f8f2',
+    },
+    'nord': {
+        'background': '#2e3440',
+        'foreground': '#d8dee9',
+        'black': '#3b4252',
+        'red': '#bf616a',
+        'green': '#a3be8c',
+        'yellow': '#ebcb8b',
+        'blue': '#81a1c1',
+        'magenta': '#b48ead',
+        'cyan': '#88c0d0',
+        'white': '#e5e9f0',
+    },
+    'github-dark': {
+        'background': '#0d1117',
+        'foreground': '#c9d1d9',
+        'black': '#21262d',
+        'red': '#f85149',
+        'green': '#7ee787',
+        'yellow': '#f2cc60',
+        'blue': '#79c0ff',
+        'magenta': '#d2a8ff',
+        'cyan': '#39d0d6',
+        'white': '#f0f6fc',
+    },
+    'catppuccin-mocha': {
+        'background': '#1e1e2e',
+        'foreground': '#cdd6f4',
+        'black': '#45475a',
+        'red': '#f38ba8',
+        'green': '#a6e3a1',
+        'yellow': '#f9e2af',
+        'blue': '#89b4fa',
+        'magenta': '#cba6f7',
+        'cyan': '#94e2d5',
+        'white': '#f5e0dc',
+    }
+}
+
+def ansi_256_to_rgb(index):
+    """Convert ANSI 256 color index to RGB tuple"""
+    index = int(index)
+    
+    if index < 16:
+        # Standard 16 colors - these should use theme colors
+        basic_colors = ['black', 'red', 'green', 'yellow', 'blue', 'magenta', 'cyan', 'white']
+        if index < 8:
+            return basic_colors[index]
+        else:
+            # Bright colors (8-15)
+            return basic_colors[index - 8]
+    
+    elif index < 232:
+        # 216 color cube (16-231)
+        index -= 16
+        r = index // 36
+        g = (index % 36) // 6
+        b = index % 6
+        
+        # Convert to RGB values: 0→0x00, 1→0x5f, 2→0x87, 3→0xaf, 4→0xd7, 5→0xff
+        rgb_values = [0x00, 0x5f, 0x87, 0xaf, 0xd7, 0xff]
+        return (rgb_values[r], rgb_values[g], rgb_values[b])
+    
+    else:
+        # Grayscale colors (232-255)
+        gray_level = (index - 232) * 10 + 8
+        return (gray_level, gray_level, gray_level)
+
+def get_themed_color(color, theme='dracula'):
+    """Convert basic color names to themed hex colors"""
+    if not color:
+        return None
+    
+    color_map = COLOR_THEMES.get(theme, COLOR_THEMES['dracula'])
+    
+    # Handle RGB tuples for true color
+    if isinstance(color, tuple) and len(color) == 3:
+        r, g, b = color
+        return f'rgb({r},{g},{b})'
+    
+    # Handle ANSI 256 color indices
+    if isinstance(color, str) and color.isdigit():
+        ansi_color = ansi_256_to_rgb(color)
+        
+        # If it's a basic color name, use theme color
+        if isinstance(ansi_color, str):
+            return color_map.get(ansi_color.lower(), ansi_color)
+        
+        # If it's an RGB tuple, convert to CSS rgb()
+        if isinstance(ansi_color, tuple):
+            r, g, b = ansi_color
+            return f'rgb({r},{g},{b})'
+    
+    # Handle basic color names
+    if isinstance(color, str):
+        return color_map.get(color.lower(), color)
+    
+    return color
+
 def txt(buffer):
     return '\n'.join(''.join(c.char for c in line) for line in buffer).rstrip() + '\n'
 
-def svg(buffer):
-    output = ['<svg xmlns="http://www.w3.org/2000/svg" font-family="monospace" font-size="16"',
-    'viewBox="0 0 800 600">']
+def svg(buffer, theme='dracula'):
+    # Calculate dimensions based on buffer content
+    max_width = max(len(line) for line in buffer) if buffer else 0
+    max_height = len(buffer)
+    
+    char_width = 10
+    char_height = 20
+    svg_width = max_width * char_width + char_width * 2  # Add padding
+    svg_height = max_height * char_height + char_height * 2  # Add padding
+    
+    # Get theme colors
+    theme_colors = COLOR_THEMES.get(theme, COLOR_THEMES['dracula'])
+    bg_color = theme_colors['background']
+    default_fg_color = theme_colors['foreground']
+    
+    output = [
+        f'<svg xmlns="http://www.w3.org/2000/svg" font-family="JetBrains Mono, Fira Code, SF Mono, Monaco, Consolas, monospace" font-size="16"',
+        f'viewBox="0 0 {svg_width} {svg_height}" width="{svg_width}" height="{svg_height}">'
+    ]
+    
+    # Add themed background fill for the entire SVG
+    output.append(f'<rect x="0" y="0" width="{svg_width}" height="{svg_height}" fill="{bg_color}"/>')
 
+    # First pass: draw background rectangles
+    for y, line in enumerate(buffer):
+        for x, char in enumerate(line):
+            if char.background:
+                themed_bg = get_themed_color(char.background, theme)
+                rect_x = (x + 1) * char_width
+                rect_y = y * char_height + char_height // 4  # Align with text baseline
+                output.append(f'<rect x="{rect_x}" y="{rect_y}" width="{char_width}" height="{char_height}" fill="{themed_bg}"/>')
+
+    # Second pass: draw text characters
     for y, line in enumerate(buffer):
         for x, char in enumerate(line):
             attributes = []
@@ -461,15 +602,42 @@ def svg(buffer):
             if 'underline' in char.attributes:
                 attributes.append('text-decoration="underline"')
             if char.foreground:
-                attributes.append(f'fill="{char.foreground}"')
-            if char.background:
-                attributes.append(f'background-color="{char.background}"')
-            output.append(f'<text x="{(x+1) * 10}" y="{(y+1) * 20}" {' '.join(attributes)}>{char.char}</text>')
+                themed_fg = get_themed_color(char.foreground, theme)
+                attributes.append(f'fill="{themed_fg}"')
+            else:
+                attributes.append(f'fill="{default_fg_color}"')  # Use themed default text color
+                
+            text_x = (x + 1) * char_width
+            text_y = (y + 1) * char_height
+            
+            # Escape special XML characters
+            escaped_char = char.char.replace('&', '&amp;').replace('<', '&lt;').replace('>', '&gt;')
+            
+            output.append(f'<text x="{text_x}" y="{text_y}" {' '.join(attributes)}>{escaped_char}</text>')
 
     output.append('</svg>')
     return '\n'.join(output)
 
 def main():
+    # Check for help or list themes
+    if '--help' in sys.argv or '-h' in sys.argv:
+        print("Usage: ansi2txt.py [--svg [--theme=<theme>]] [--decode-only] [--list-themes]")
+        print("Convert ANSI escape sequences to plain text or SVG")
+        print("")
+        print("Options:")
+        print("  --svg              Output as SVG")
+        print("  --theme=<theme>    Use specified color theme for SVG (default: dracula)")
+        print("  --decode-only      Only decode escape sequences")
+        print("  --list-themes      List available color themes")
+        print("  --help, -h         Show this help message")
+        return
+    
+    if '--list-themes' in sys.argv:
+        print("Available color themes:")
+        for theme_name in COLOR_THEMES.keys():
+            print(f"  {theme_name}")
+        return
+
     inputBytes = sys.stdin.buffer.read()
     parsed = parse(inputBytes)
 
@@ -477,7 +645,21 @@ def main():
         for item in parsed:
             print(item)
     elif '--svg' in sys.argv:
-        print(svg(render(parsed)))
+        # Check for theme argument
+        theme = 'dracula'  # default theme
+        for i, arg in enumerate(sys.argv):
+            if arg.startswith('--theme='):
+                theme = arg.split('=', 1)[1]
+            elif arg == '--theme' and i + 1 < len(sys.argv):
+                theme = sys.argv[i + 1]
+        
+        # Validate theme
+        if theme not in COLOR_THEMES:
+            print(f"Error: Unknown theme '{theme}'. Available themes: {', '.join(COLOR_THEMES.keys())}", file=sys.stderr)
+            print("Use --list-themes to see all available themes.", file=sys.stderr)
+            sys.exit(1)
+            
+        print(svg(render(parsed), theme))
     else:
         print(txt(render(parsed)))
 

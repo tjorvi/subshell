@@ -17,50 +17,9 @@ viewBox="0 0 2030 180" width="2030" height="180">
 <rect x="160" y="105" width="10" height="20" fill="#bd93f9"/>
 <rect x="170" y="105" width="10" height="20" fill="#bd93f9"/>
 <rect x="180" y="105" width="10" height="20" fill="#bd93f9"/>
-<rect x="190" y="105" width="10" height="20" fill="#21222c"/>
-<rect x="200" y="105" width="10" height="20" fill="#21222c"/>
-<rect x="210" y="105" width="10" height="20" fill="#21222c"/>
-<rect x="220" y="105" width="10" height="20" fill="#21222c"/>
-<rect x="230" y="105" width="10" height="20" fill="#21222c"/>
-<rect x="240" y="105" width="10" height="20" fill="#21222c"/>
-<rect x="250" y="105" width="10" height="20" fill="#21222c"/>
-<rect x="260" y="105" width="10" height="20" fill="#21222c"/>
-<rect x="270" y="105" width="10" height="20" fill="#21222c"/>
-<rect x="280" y="105" width="10" height="20" fill="#21222c"/>
-<rect x="290" y="105" width="10" height="20" fill="#21222c"/>
-<rect x="300" y="105" width="10" height="20" fill="#21222c"/>
-<rect x="310" y="105" width="10" height="20" fill="#21222c"/>
-<rect x="320" y="105" width="10" height="20" fill="#21222c"/>
-<rect x="330" y="105" width="10" height="20" fill="#21222c"/>
-<rect x="340" y="105" width="10" height="20" fill="#21222c"/>
-<rect x="350" y="105" width="10" height="20" fill="#21222c"/>
-<rect x="360" y="105" width="10" height="20" fill="#21222c"/>
-<rect x="370" y="105" width="10" height="20" fill="#21222c"/>
-<rect x="380" y="105" width="10" height="20" fill="#21222c"/>
-<rect x="390" y="105" width="10" height="20" fill="#21222c"/>
-<rect x="400" y="105" width="10" height="20" fill="#21222c"/>
-<rect x="410" y="105" width="10" height="20" fill="#21222c"/>
-<rect x="420" y="105" width="10" height="20" fill="#21222c"/>
-<rect x="430" y="105" width="10" height="20" fill="#21222c"/>
-<rect x="440" y="105" width="10" height="20" fill="#21222c"/>
-<rect x="450" y="105" width="10" height="20" fill="#21222c"/>
-<rect x="460" y="105" width="10" height="20" fill="#21222c"/>
-<rect x="470" y="105" width="10" height="20" fill="#21222c"/>
-<rect x="480" y="105" width="10" height="20" fill="#21222c"/>
-<rect x="490" y="105" width="10" height="20" fill="#21222c"/>
-<rect x="500" y="105" width="10" height="20" fill="#21222c"/>
-<rect x="510" y="105" width="10" height="20" fill="#21222c"/>
-<rect x="520" y="105" width="10" height="20" fill="#21222c"/>
-<rect x="530" y="105" width="10" height="20" fill="#21222c"/>
-<rect x="540" y="105" width="10" height="20" fill="#21222c"/>
-<rect x="550" y="105" width="10" height="20" fill="#21222c"/>
-<rect x="560" y="105" width="10" height="20" fill="#21222c"/>
-<rect x="570" y="105" width="10" height="20" fill="#21222c"/>
-<rect x="580" y="105" width="10" height="20" fill="#21222c"/>
-<rect x="590" y="105" width="10" height="20" fill="#21222c"/>
+<rect x="1970" y="105" width="10" height="20" fill="#21222c"/>
 <rect x="1980" y="105" width="10" height="20" fill="#21222c"/>
 <rect x="1990" y="105" width="10" height="20" fill="#21222c"/>
-<rect x="2000" y="105" width="10" height="20" fill="#21222c"/>
 <text x="10" y="20" fill="#f8f8f2">[</text>
 <text x="20" y="20" fill="#f1fa8c">p</text>
 <text x="30" y="20" fill="#f1fa8c">o</text>
@@ -325,47 +284,47 @@ viewBox="0 0 2030 180" width="2030" height="180">
 <text x="170" y="120" fill="rgb(238,238,238)">e</text>
 <text x="180" y="120" fill="rgb(228,228,228)"> </text>
 <text x="190" y="120" fill="#bd93f9"></text>
-<text x="200" y="120" fill="rgb(255,0,0)"> </text>
-<text x="210" y="120" fill="rgb(255,0,0)">‼</text>
-<text x="220" y="120" fill="rgb(255,0,0)">️</text>
-<text x="230" y="120" fill="rgb(255,0,0)"> </text>
-<text x="240" y="120" fill="rgb(255,0,0)">s</text>
-<text x="250" y="120" fill="rgb(255,0,0)">u</text>
-<text x="260" y="120" fill="rgb(255,0,0)">b</text>
-<text x="270" y="120" fill="rgb(255,0,0)">s</text>
-<text x="280" y="120" fill="rgb(255,0,0)">h</text>
-<text x="290" y="120" fill="rgb(255,0,0)">e</text>
-<text x="300" y="120" fill="rgb(255,0,0)">l</text>
-<text x="310" y="120" fill="rgb(255,0,0)">l</text>
-<text x="320" y="120" fill="rgb(255,0,0)"> </text>
-<text x="330" y="120" fill="rgb(255,0,0)">o</text>
-<text x="340" y="120" fill="rgb(255,0,0)">u</text>
-<text x="350" y="120" fill="rgb(255,0,0)">t</text>
-<text x="360" y="120" fill="rgb(255,0,0)">s</text>
-<text x="370" y="120" fill="rgb(255,0,0)">i</text>
-<text x="380" y="120" fill="rgb(255,0,0)">d</text>
-<text x="390" y="120" fill="rgb(255,0,0)">e</text>
-<text x="400" y="120" fill="rgb(255,0,0)"> </text>
-<text x="410" y="120" fill="rgb(255,0,0)">/</text>
-<text x="420" y="120" fill="rgb(255,0,0)">t</text>
-<text x="430" y="120" fill="rgb(255,0,0)">m</text>
-<text x="440" y="120" fill="rgb(255,0,0)">p</text>
-<text x="450" y="120" fill="rgb(255,0,0)">/</text>
-<text x="460" y="120" fill="rgb(255,0,0)">s</text>
-<text x="470" y="120" fill="rgb(255,0,0)">u</text>
-<text x="480" y="120" fill="rgb(255,0,0)">b</text>
-<text x="490" y="120" fill="rgb(255,0,0)">s</text>
-<text x="500" y="120" fill="rgb(255,0,0)">h</text>
-<text x="510" y="120" fill="rgb(255,0,0)">e</text>
-<text x="520" y="120" fill="rgb(255,0,0)">l</text>
-<text x="530" y="120" fill="rgb(255,0,0)">l</text>
-<text x="540" y="120" fill="rgb(255,0,0)">-</text>
-<text x="550" y="120" fill="rgb(255,0,0)">d</text>
-<text x="560" y="120" fill="rgb(255,0,0)">e</text>
-<text x="570" y="120" fill="rgb(255,0,0)">m</text>
-<text x="580" y="120" fill="rgb(255,0,0)">o</text>
-<text x="590" y="120" fill="rgb(255,0,0)"> </text>
-<text x="600" y="120" fill="#21222c"></text>
+<text x="200" y="120" fill="rgb(128,128,128)">·</text>
+<text x="210" y="120" fill="rgb(128,128,128)">·</text>
+<text x="220" y="120" fill="rgb(128,128,128)">·</text>
+<text x="230" y="120" fill="rgb(128,128,128)">·</text>
+<text x="240" y="120" fill="rgb(128,128,128)">·</text>
+<text x="250" y="120" fill="rgb(128,128,128)">·</text>
+<text x="260" y="120" fill="rgb(128,128,128)">·</text>
+<text x="270" y="120" fill="rgb(128,128,128)">·</text>
+<text x="280" y="120" fill="rgb(128,128,128)">·</text>
+<text x="290" y="120" fill="rgb(128,128,128)">·</text>
+<text x="300" y="120" fill="rgb(128,128,128)">·</text>
+<text x="310" y="120" fill="rgb(128,128,128)">·</text>
+<text x="320" y="120" fill="rgb(128,128,128)">·</text>
+<text x="330" y="120" fill="rgb(128,128,128)">·</text>
+<text x="340" y="120" fill="rgb(128,128,128)">·</text>
+<text x="350" y="120" fill="rgb(128,128,128)">·</text>
+<text x="360" y="120" fill="rgb(128,128,128)">·</text>
+<text x="370" y="120" fill="rgb(128,128,128)">·</text>
+<text x="380" y="120" fill="rgb(128,128,128)">·</text>
+<text x="390" y="120" fill="rgb(128,128,128)">·</text>
+<text x="400" y="120" fill="rgb(128,128,128)">·</text>
+<text x="410" y="120" fill="rgb(128,128,128)">·</text>
+<text x="420" y="120" fill="rgb(128,128,128)">·</text>
+<text x="430" y="120" fill="rgb(128,128,128)">·</text>
+<text x="440" y="120" fill="rgb(128,128,128)">·</text>
+<text x="450" y="120" fill="rgb(128,128,128)">·</text>
+<text x="460" y="120" fill="rgb(128,128,128)">·</text>
+<text x="470" y="120" fill="rgb(128,128,128)">·</text>
+<text x="480" y="120" fill="rgb(128,128,128)">·</text>
+<text x="490" y="120" fill="rgb(128,128,128)">·</text>
+<text x="500" y="120" fill="rgb(128,128,128)">·</text>
+<text x="510" y="120" fill="rgb(128,128,128)">·</text>
+<text x="520" y="120" fill="rgb(128,128,128)">·</text>
+<text x="530" y="120" fill="rgb(128,128,128)">·</text>
+<text x="540" y="120" fill="rgb(128,128,128)">·</text>
+<text x="550" y="120" fill="rgb(128,128,128)">·</text>
+<text x="560" y="120" fill="rgb(128,128,128)">·</text>
+<text x="570" y="120" fill="rgb(128,128,128)">·</text>
+<text x="580" y="120" fill="rgb(128,128,128)">·</text>
+<text x="590" y="120" fill="rgb(128,128,128)">·</text>
+<text x="600" y="120" fill="rgb(128,128,128)">·</text>
 <text x="610" y="120" fill="rgb(128,128,128)">·</text>
 <text x="620" y="120" fill="rgb(128,128,128)">·</text>
 <text x="630" y="120" fill="rgb(128,128,128)">·</text>
@@ -501,12 +460,11 @@ viewBox="0 0 2030 180" width="2030" height="180">
 <text x="1930" y="120" fill="rgb(128,128,128)">·</text>
 <text x="1940" y="120" fill="rgb(128,128,128)">·</text>
 <text x="1950" y="120" fill="rgb(128,128,128)">·</text>
-<text x="1960" y="120" fill="rgb(128,128,128)">·</text>
-<text x="1970" y="120" fill="#21222c"></text>
-<text x="1980" y="120" fill="#50fa7b"> </text>
-<text x="1990" y="120" fill="#50fa7b">✔</text>
-<text x="2000" y="120" fill="#50fa7b"> </text>
-<text x="2010" y="120" fill="#f8f8f2"> </text>
+<text x="1960" y="120" fill="#21222c"></text>
+<text x="1970" y="120" fill="#50fa7b"> </text>
+<text x="1980" y="120" fill="#50fa7b">✔</text>
+<text x="1990" y="120" fill="#50fa7b"> </text>
+<text x="2000" y="120" fill="#f8f8f2"> </text>
 <text x="10" y="140" fill="rgb(128,128,128)">╰</text>
 <text x="20" y="140" fill="rgb(128,128,128)">─</text>
 <text x="30" y="140" fill="#f8f8f2"> </text>

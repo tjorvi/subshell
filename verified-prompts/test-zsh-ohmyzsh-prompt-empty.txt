@@ -1,0 +1,5 @@
+➜  subshell-demo subshell 
+➜  subshell-demo cd demo-subdir 
+➜  demo-subdir cd /tmp/outside 
+➜  outside
+

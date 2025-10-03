@@ -1,6 +1,6 @@
 from termrec import terminal
 
-async def capture_session(user, shell, script):
+async def capture_session(user, shell, script, env_vars=None):
     output = []
 
     if shell == 'fish':
@@ -24,8 +24,14 @@ async def capture_session(user, shell, script):
         '-w', PROJECT_ROOT,
         '-h', 'demo',
         *shellArgs,
-        'subshell-demo-tools',
     ]
+    
+    # Add environment variables if provided
+    if env_vars:
+        for key, value in env_vars.items():
+            cmd.extend(['-e', f'{key}={value}'])
+    
+    cmd.append('subshell-demo-tools')
 
     smBracketedPaste = b'\x1b[?2004h'  # Bracketed paste mode enable
 
