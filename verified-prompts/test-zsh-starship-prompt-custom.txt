@@ -1,0 +1,13 @@
+ 
+subshell-demo🔒 on  master  
+⬢ [Docker] ❯ subshell 
+ 
+subshell-demo🔒 on  master 📂mycustom 
+⬢ [Docker] ❯ cd demo-subdir 
+ 
+subshell-demo/demo-subdir🔒 on  master 📂mycustom 
+⬢ [Docker] ❯ cd /tmp/outside 
+ 
+/tmp/outside🔒 ‼️ mycustom (outside /tmp/subshell-demo) 
+⬢ [Docker] ❯
+

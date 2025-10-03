@@ -1,5 +1,7 @@
 # Subshell
 
+![Subshell Demo](verified-prompts/test-zsh-default.svg)
+
 Directory-aware prompt prefix line that manages l- SUBSHELL_PROMPT: The label to display. Defaults to `subshell` if unset. If set to an empty string, no prefix is injected but `$SUBSHELL_OUTSIDE` is still exported for custom prompt logic.
 - SUBSHELL_ROOT: Optional project root. Resolved to an absolute path. You're "inside" when `$PWD` equals or is under this root; otherwise "outside". If `SUBSHELL_ROOT` is unset and a `.subshell` file exists in `$PWD`, then `$PWD` is used as the root for this session and `SUBSHELL_ROOT` is set in the launched subshell.al secrets and renders a reminder above your existing prompt (or just below a leading blank line if your prompt starts with one). It's lightweight, portable, and plays nicely with your current theme.
 

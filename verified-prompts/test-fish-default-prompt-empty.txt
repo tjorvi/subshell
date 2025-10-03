@@ -1,0 +1,7 @@
+Welcome to fish, the friendly interactive shell 
+Type help for instructions on how to use fish 
+demo@demo /t/subshell-demo> subshell 
+demo@demo /t/subshell-demo> cd demo-subdir 
+demo@demo /t/s/demo-subdir> cd /tmp/outside 
+demo@demo /t/outside>
+

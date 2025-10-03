@@ -1,0 +1,5 @@
+demo@demo /tmp/subshell-demo % subshell 
+demo@demo /tmp/subshell-demo % cd demo-subdir 
+demo@demo /tmp/subshell-demo/demo-subdir % cd /tmp/outside 
+demo@demo /tmp/outside %
+
